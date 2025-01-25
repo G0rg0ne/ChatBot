@@ -24,6 +24,7 @@ RUN pip3 install --no-cache-dir -r requirements.txt
 ENV LANGFLOW_PORT=7860
 
 EXPOSE 7860
+EXPOSE 11434
 
 # Run Langflow (if you're using CMD)
 CMD ["langflow", "--port", "7860"]
