@@ -3,6 +3,7 @@ import openai
 from typing import List, Dict
 import time
 import sentry_sdk
+from utils.style_loader import load_css
 
 # Initialize Sentry at the top of your app
 sentry_sdk.init(
@@ -127,61 +128,10 @@ if __name__ == "__main__":
         page_title="AI Chatbot",
         page_icon="🤖",
         layout="centered",
-        # Add dark theme
         initial_sidebar_state="expanded"
     )
     
-    # Updated custom CSS
-    st.markdown("""
-        <style>
-        /* Dark theme for the main page */
-        .stApp {
-            background-color: #0E1117;
-            color: #FAFAFA;
-        }
-        
-        /* Style for chat messages */
-        .stChatMessage {
-            background-color: #262730;
-            border-radius: 15px;
-            padding: 15px;
-            margin: 5px 0;
-        }
-        
-        /* User message specific style */
-        .stChatMessage[data-testid="chat-message-user"] {
-            background-color: #004D40;
-        }
-        
-        /* Assistant message specific style */
-        .stChatMessage[data-testid="chat-message-assistant"] {
-            background-color: #1E1E1E;
-        }
-        
-        /* Input box style */
-        .stChatInputContainer {
-            background-color: #262730;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        
-        /* Sidebar style */
-        .css-1d391kg {
-            background-color: #262730;
-        }
-        
-        /* Button style */
-        .stButton>button {
-            background-color: #004D40;
-            color: white;
-            border-radius: 5px;
-        }
-        
-        .stButton>button:hover {
-            background-color: #00695C;
-            color: white;
-        }
-        </style>
-    """, unsafe_allow_html=True)
+    # Load and apply CSS
+    st.markdown(load_css(), unsafe_allow_html=True)
     
     main() 
