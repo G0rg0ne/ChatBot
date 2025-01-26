@@ -99,13 +99,21 @@ The following environment variables are required:
 ```
 ai-chatbot/
 ├── app.py              # Main application file
-├── requirements.txt    # Python dependencies
-├── .gitignore         # Git ignore file
-├── README.md          # Project documentation
+├── Dockerfile         # Docker configuration
+├── docker-compose.yml # Docker compose configuration
+├── requirements.txt   # Python dependencies
+├── .env              # Environment variables
+├── .gitignore        # Git ignore file
+├── README.md         # Project documentation
+├── styles/           # CSS styles directory
+│   ├── __init__.py
+│   └── main.css      # Main CSS styles
+├── utils/            # Utility functions
+│   ├── __init__.py
+│   └── style_loader.py  # CSS loading utility
 └── .streamlit/
-    └── secrets.toml   # Configuration secrets
+    └── secrets.toml  # Configuration secrets
 ```
-
 ## 🎯 Usage
 
 1. Select your preferred model from the sidebar
