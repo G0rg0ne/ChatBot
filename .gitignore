@@ -121,3 +121,7 @@ __pycache__
 *.swp
 *.swo
 *~ 
+
+# API Keys and Secrets
+.env
+.streamlit/secrets.toml 
