@@ -2,6 +2,10 @@
 
 A modern chatbot application built with Streamlit and OpenAI's GPT models, featuring a sleek dark theme UI and error monitoring with Sentry.
 
+## 📸 Screenshot
+
+![AI Chatbot Interface](assets/SS.png)
+
 ## 🚀 Features
 
 - 💬 Real-time chat interface
