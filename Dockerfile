@@ -20,11 +20,9 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 RUN pip3 install --no-cache-dir -r requirements.txt
 
-# Set the Langflow port
-ENV LANGFLOW_PORT=7860
+# Set the Streamlit port
+ENV STREAMLIT_PORT=8501
 
-EXPOSE 7860
+# Expose ports for Streamlit and Ollama
+EXPOSE 8501
 EXPOSE 11434
-
-# Run Langflow (if you're using CMD)
-CMD ["langflow", "--port", "7860"]
