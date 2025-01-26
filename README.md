@@ -130,34 +130,12 @@ This project uses Sentry for error tracking and performance monitoring. Key metr
 - User interactions
 - API call performance
 
-## 🛡️ Security
-
-- API keys are stored securely in `.streamlit/secrets.toml`
-- Environment variables are used for sensitive data
-- Sentry DSN is kept private
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a new branch
-3. Make your changes
-4. Submit a pull request
 
 ## 📝 License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🙏 Acknowledgments
 
-- OpenAI for their GPT models
-- Streamlit for the awesome framework
-- Sentry for error monitoring
-
-## 📧 Contact
-
-Your Name - [your.email@example.com](mailto:your.email@example.com)
-
-Project Link: [https://github.com/yourusername/ai-chatbot](https://github.com/yourusername/ai-chatbot)
 
 
 Additional material for prototyping tour chatbot using cutting edge technologies: 
