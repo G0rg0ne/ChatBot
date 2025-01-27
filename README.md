@@ -136,8 +136,6 @@ This project uses Sentry for error tracking and performance monitoring. Key metr
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-
-
 Additional material for prototyping tour chatbot using cutting edge technologies: 
 Using [Ollama](https://ollama.ai/) to downlaod models:
 
@@ -151,6 +149,7 @@ ollama pull llama3
 Note : You can setup the model's location by editing your OS environment variable.
 
 You can run LangFlow with the following command : 
+```
 langflow run --port 7860 --host 0.0.0.0
 ```
 
