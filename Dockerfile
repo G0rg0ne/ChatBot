@@ -1,5 +1,5 @@
-# Use NVIDIA PyTorch container which comes with Python 3.10
-FROM nvcr.io/nvidia/pytorch:23.12-py3
+# Use Python slim image as base for smaller size
+FROM python:3.10-slim
 
 # Set environment variables
 ENV LANG=C.UTF-8
@@ -7,21 +7,18 @@ ENV PYTHONUNBUFFERED=1
 ENV STREAMLIT_SERVER_PORT=8501
 ENV STREAMLIT_SERVER_ADDRESS=0.0.0.0
 
-# Install additional system dependencies
+# Install minimal dependencies
 RUN apt-get update && apt-get install -y \
-    libsm6 \
-    libxext6 \
-    libxrender-dev \
-    vim \
-    curl \
+    gcc \
     && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
 
-# Copy requirements and install dependencies
+# Copy and install requirements first (for better caching)
 COPY requirements.txt .
-RUN pip3 install --no-cache-dir -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt \
+    && rm -rf /root/.cache/pip
 
 # Copy the application
 COPY . .
