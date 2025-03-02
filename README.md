@@ -52,7 +52,7 @@ docker-compose down
 docker build -t chatbot .
 
 # Run the container
-docker run -it --rm --gpus all -p 8501:8501  -v $PWD:/app chatbot /bin/bash
+docker run -it --rm -p 8501:8501  -v $PWD:/app chatbot /bin/bash
 
 # Stop the container
 docker stop ai-chatbot

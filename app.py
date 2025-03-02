@@ -30,35 +30,40 @@ class Message:
         self.role = role
 
 class ChatBot:
-    def __init__(self):
+    def __init__(self,temperature,model):
         try:
             self.client = openai.OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
             # Initialize with default model, will be updated via sidebar selection
-            self.model = "gpt-3.5-turbo"  # Default model, will be updated via sidebar
+            self.temperature=temperature
+            self.model = model # Default model, will be updated via sidebar
+            
         except Exception as e:
             sentry_sdk.capture_exception(e)
             raise e
     
     def generate_response(self, prompt: str) -> str:
-        messages = [{"role": "user", "content": prompt}]
+        # Include conversation history up to a context window
+        context_window = 5  # Define the number of previous messages to include
+        messages = [{"role": msg.role, "content": msg.content} for msg in st.session_state.messages[-context_window:]]
+        messages.append({"role": "user", "content": prompt})
         try:
             with sentry_sdk.start_span(op="openai_request", description="Generate AI Response"):
                 response = self.client.chat.completions.create(
                     model=self.model,
                     messages=messages,
-                    temperature=0.7,
+                    temperature=self.temperature,
                 )
             return response.choices[0].message.content
         except Exception as e:
             sentry_sdk.capture_exception(e)
             return f"Error: {str(e)}"
 
-def initialize_session_state():
+def initialize_session_state(temperature,model):
     """Initialize session state variables"""
     if 'messages' not in st.session_state:
         st.session_state.messages = []
     if 'chat_bot' not in st.session_state:
-        st.session_state.chat_bot = ChatBot()
+        st.session_state.chat_bot = ChatBot(temperature,model)
 
 def display_messages():
     """Display chat messages"""
@@ -70,8 +75,6 @@ def main():
     try:
         st.title("🤖 AI Chatbot")
         
-        # Initialize session state
-        initialize_session_state()
         
         # Add user context to Sentry
         sentry_sdk.set_user({"id": st.session_state.get("user_id", "anonymous")})
@@ -82,7 +85,6 @@ def main():
             ["gpt-3.5-turbo", "gpt-4"],
             key="model_selector"
         )
-        st.session_state.chat_bot.model = model
         
         # Temperature slider
         temperature = st.sidebar.slider(
@@ -92,6 +94,8 @@ def main():
             value=0.7,
             step=0.1
         )
+        # Initialize session state
+        initialize_session_state(temperature,model)
         
         # Clear chat button
         if st.sidebar.button("Clear Chat"):
